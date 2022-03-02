@@ -1,23 +1,23 @@
 // Preambulo
 // Ayuda a manejar errores http
-var createError = require('http-errors');
+import createError from 'http-errors';
 // Ayuda a crear servidores web
-var express = require('express');
+import express from 'express';
 // Nucleo de node, ayuda al manejo de las rutas
-var path = require('path');
+import path from 'path';
 // Ayuda al manejo de las cookies
-var cookieParser = require('cookie-parser');
+import cookieParser from 'cookie-parser';
 // Maneja el log de peticiones http
-var logger = require('morgan');
+import logger from 'morgan';
 
 // Las rutas
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var aboutRouter = require('./routes/about');
+import indexRouter from "./routes/index";
+import usersRouter from "./routes/users";
+import aboutRouter from "./routes/about";
 
 // Aqui se crea la instancia de express 
 //(req, res, next, err) => {... }
-var app = express();
+const app = express();
 
 // Configuración del motor de plantillas ( template Engine)
 // view engine setup
@@ -39,12 +39,12 @@ app.use('/users', usersRouter);
 app.use('/about',aboutRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next)=> {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -54,4 +54,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+// Exportando instancia de app
+// usando Js moderno
+export default app;
+
+
