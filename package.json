@@ -3,9 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./server/bin/www.js",
-    "dev": "babel-watch ./server/bin/www"
+    "start": "node ./dist/bin/www",
+    "dev": "babel-watch ./server/bin/www",
+    "build:s": "npm run clean:cp && babel ./server --out-dir dist --copy-files",
+    "clean:cp": "rimraf dist"
   },
+
   "dependencies": {
     "app-root-path": "^3.0.0",
     "cookie-parser": "~1.4.4",
