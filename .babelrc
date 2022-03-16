@@ -6,5 +6,15 @@
                 "targets":{"node": "current"}
             }
          ]
+    ],
+    "plugins": [
+        [
+            "module-resolver",{
+                "root": "./",
+                "alias":{
+                    "@s":"./server"
+                }
+            }
+        ]
     ]
 }
