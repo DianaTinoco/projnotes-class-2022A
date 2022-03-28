@@ -7,7 +7,7 @@
     "dev": "babel-watch ./server/bin/www",
     "build:s": "npm run clean:cp && babel ./server --out-dir dist --copy-files",
     "clean:cp": "rimraf dist",
-    "client:server": "SET NODE_ENV=development && webpack serve --config ./webpack.config.js --mode development"
+    "client:server": "SET NODE_ENV=development && webpack serve --config ./webpack.dev.config.js --mode development"
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
