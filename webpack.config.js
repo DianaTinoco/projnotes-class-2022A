@@ -2,7 +2,7 @@
 // dependencia del core Node
 const path = require('path');
 
-module.export = {
+module.exports = {
     // 1. Especificar el archivo de entrada 
     entry: '/client/index.js',
     // 2. Especificar el archivo de salida
@@ -13,7 +13,7 @@ module.export = {
         filename: 'bundle.js'
     },
     // 3. Configurando el servidor de desarrollo
-    devServe:{
+    devServer:{
         // 3.1 Folder de archivos estaticos
         static: path.join(__dirname,'public'),
         // 3.2 Puerto del servidor 
