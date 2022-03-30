@@ -2,7 +2,7 @@
 // dependencia del core Node
 const path = require('path');
 // Plugins para Webpack
-const MiniCssExtractPlugin = requiere('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     // 1. Especificar el archivo de entrada 
@@ -51,6 +51,6 @@ module.exports = {
     },
     // 4. Plugins
     plugins: [ new MiniCssExtractPlugin({
-        filename: path.join('stylesheet','styles.css')
+        filename: path.join('stylesheets','styles.css')
     })]
 };

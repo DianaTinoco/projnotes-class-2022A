@@ -5,9 +5,11 @@
   "scripts": {
     "start": "node ./dist/bin/www",
     "dev": "babel-watch ./server/bin/www",
-    "build:s": "npm run clean:cp && babel ./server --out-dir dist --copy-files",
-    "clean:cp": "rimraf dist",
-    "client:server": "SET NODE_ENV=development && webpack serve --config ./webpack.dev.config.js --mode development"
+    "client:server": "SET NODE_ENV=development && webpack serve --config ./webpack.dev.config.js --mode development",
+    "clean:server": "rimraf dist",
+    "clean:client": "rimraf public/javascripts/bundle.js && rimraf public/stylesheets/styles.css",
+    "build:s": "npm run clean:server && babel ./server --out-dir dist --copy-files",
+    "build:client": "npm run clean:client && webpack --config ./webpack.config.js --mode production"
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
