@@ -1,6 +1,8 @@
 // Importando dependencias path
 // dependencia del core Node
 const path = require('path');
+// Plugins para Webpack
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     // 1. Especificar el archivo de entrada 
@@ -27,12 +29,12 @@ module.exports = {
     // 4. Modulos
     module:{
         rules:[
-            // 3.1 Regla para Babel
+            // 4.1 Regla para Babel
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: [
-                    // 3.1.1 Primer stage
+                    // 4.1.1 Primer stage
                     {
                         loader:'babel-loader',
                         options: {
@@ -50,6 +52,15 @@ module.exports = {
                     }
                 ]
             },
+            // 4.2 Reglas para Css
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            }
         ]
     },
+    // 5. Plugins
+    plugins: [ new MiniCssExtractPlugin({
+        filename: path.join('stylesheets','styles.css')
+    })]
 };
