@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 // Preambulo
 // Ayuda a manejar errores http
 import createError from 'http-errors';
@@ -11,22 +13,22 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
 // Las rutas
-import indexRouter from "./routes/index";
-import usersRouter from "./routes/users";
-import aboutRouter from "./routes/about";
+import webpack from 'webpack';
+import WebpackDevMiddleware from 'webpack-dev-middleware';
+import WebpackHotMiddleware from 'webpack-hot-middleware';
+import indexRouter from './routes/index';
+import usersRouter from './routes/users';
+import aboutRouter from './routes/about';
 
 // Importando modulos de webpack
 // Nucleo de webpack
-import webpack from 'webpack';
 // Permite incrustar webpack en express
-import WebpackDevMiddleware from 'webpack-dev-middleware';
 // Permite la actualización dinamica de la página
-import WebpackHotMiddleware from "webpack-hot-middleware";
 // Configuración
 import webpackConfig from '../webpack.dev.config';
 
-// Aqui se crea la instancia de express 
-//(req, res, next, err) => {... }
+// Aqui se crea la instancia de express
+// (req, res, next, err) => {... }
 const app = express();
 
 // Recuperar el modo de ejecución
@@ -39,13 +41,13 @@ if (nodeEnv === 'development') {
 
   // Establiendo el modo de webpack en desarrollo
   // en el configurador
-  webpackConfig.mode = "development";
+  webpackConfig.mode = 'development';
 
   // Congigurando la ruta del HMR (Hot Module Replacemnet)
   // reload=true : Habilita la recarga automatica cuando un archivo Js camboa
   // timeout=1000 : Tiempo de refresco de pagina
   webpackConfig.entry = [
-    "webpack-hot-middleware/client?reload=true&timeout=1000",
+    'webpack-hot-middleware/client?reload=true&timeout=1000',
     webpackConfig.entry,
   ];
   // Agregando el plugin a la configuración de desarrollo
@@ -55,13 +57,14 @@ if (nodeEnv === 'development') {
   const bundler = webpack(webpackConfig);
 
   // Habilitando el Middleware de webpack en express
-  app.use(WebpackDevMiddleware(bundler, {
-    publicPath: webpackConfig.output.publicPath
-  }));
+  app.use(
+    WebpackDevMiddleware(bundler, {
+      publicPath: webpackConfig.output.publicPath,
+    })
+  );
 
   // Habilitando el Middleware del Webpack HMR
   app.use(WebpackHotMiddleware(bundler));
-
 } else {
   console.log(`✍ Ejecutando en modo producción ⚙⚙`);
 }
@@ -77,12 +80,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // Middleware de archivos estaticos
-app.use(express.static(path.join(__dirname,"..", 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Registrando las rutas en la App
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/about',aboutRouter);
+app.use('/about', aboutRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -90,7 +93,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res, next)=> {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -103,5 +106,3 @@ app.use((err, req, res, next)=> {
 // Exportando instancia de app
 // usando Js moderno
 export default app;
-
-

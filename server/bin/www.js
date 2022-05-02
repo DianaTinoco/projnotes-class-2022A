@@ -6,18 +6,17 @@
 
 // var app = require('../app');
 import app from '@s/app';
-//var debug = require('debug')('projnotes:server');
+// var debug = require('debug')('projnotes:server');
 import Debug from 'debug';
 import http from 'http';
 
-
 // Creando instancia del debugger
-const debug  = Debug("projnotes:server");
+const debug = Debug('projnotes:server');
 
 /**
  * Get port from environment and store in Express.
  */
-/**process.env.PORT Forma de acceder a la variable de entorno */
+/** process.env.PORT Forma de acceder a la variable de entorno */
 const port = normalizePort(process.env.PORT || '3000');
 // app es una instancia de ExpressJs[ ] [ NODE ]
 app.set('port', port);
@@ -33,7 +32,7 @@ const server = http.createServer(app); // (req, res, next, err) => {}
  */
 
 server.listen(port); // Pone al server a escuchar
-// Se registran eventos 
+// Se registran eventos
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -66,9 +65,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -91,10 +88,7 @@ function onError(error) {
 
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === "string"
-    ? `pipe ${addr}`
-    : `port ${addr.port}`;
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
   debug(`Listening on  ${bind}`);
-  console.log(`✍Servidor escuchando... en 👂 ${app.get('port')}`)
-
+  console.log(`✍Servidor escuchando... en 👂 ${app.get('port')}`);
 }
