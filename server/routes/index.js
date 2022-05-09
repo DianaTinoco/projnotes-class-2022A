@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
     'index',
     // Este el el View_Model
     {
-      title: 'Express',
+      title: 'Projnotes',
       author: 'Diana Laura Paredes Tinoco',
       emojie,
     }
