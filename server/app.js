@@ -11,11 +11,12 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 // Maneja el log de peticiones http
 import morgan from 'morgan';
-
 // Las rutas
 import webpack from 'webpack';
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
+// importando configurador de plantillas
+import templateEngineConfigurator from './Config/templateEngine';
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
 import aboutRouter from './routes/about';
@@ -73,8 +74,7 @@ if (nodeEnv === 'development') {
 }
 // Configuración del motor de plantillas ( template Engine)
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+templateEngineConfigurator(app);
 
 // Todos los middlerwares globales
 // van primero que cualquier otro middleware de la app
