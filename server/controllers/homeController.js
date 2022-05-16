@@ -22,7 +22,7 @@ const index = (req, res) => {
     author: 'Diana Laura Paredes Tinoco',
     emojie,
   };
-  res.render('index', viewModel);
+  res.render('home/indexView', viewModel);
 };
 
 // URL: Get /about
