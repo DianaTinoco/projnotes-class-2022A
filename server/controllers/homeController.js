@@ -24,7 +24,18 @@ const index = (req, res) => {
   };
   res.render('index', viewModel);
 };
+
+// URL: Get /about
+const about = (req, res) => {
+  res.render('home/aboutView', {
+    name: 'Diana Laura',
+    email: 'dtinoco152@gmail.com',
+    url: 'https:',
+  });
+};
+
 export default {
   // Action Methods
   index,
+  about,
 };
