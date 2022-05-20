@@ -18,37 +18,14 @@ import configKeys from '../Config/configKeys';
 // Creando instancia del debugger
 const debug = Debug('projnotes:server');
 
-/**
- * Get port from environment and store in Express.
- */
-/** process.env.PORT Forma de acceder a la variable de entorno */
-const port = normalizePort(configKeys.port || '5000');
-// app es una instancia de ExpressJs[ ] [ NODE ]
-app.set('port', port);
-
-/**
- * Create HTTP server.
- */
-
-const server = http.createServer(app); // (req, res, next, err) => {}
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port); // Pone al server a escuchar
-// Se registran eventos
-server.on('error', onError);
-server.on('listening', onListening);
-
-/**
+/*
  * Normalize a port into a number, string, or false.
  */
 
 function normalizePort(val) {
   const port = parseInt(val, 10);
 
-  if (isNaN(port)) {
+  if (Number.isNaN(port)) {
     // named pipe
     return val;
   }
@@ -60,6 +37,20 @@ function normalizePort(val) {
 
   return false;
 }
+
+/**
+ * Get port from environment and store in Express.
+ */
+/** process.env.PORT Forma de acceder a la variable de entorno */
+const port = normalizePort(configKeys.env.PORT || '5000');
+// app es una instancia de ExpressJs[ ] [ NODE ]
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+const server = http.createServer(app); // (req, res, next, err) => {}
 
 /**
  * Event listener for HTTP server "error" event.
@@ -97,3 +88,12 @@ function onListening() {
   debug(`Listening on  ${bind}`);
   winston.info(`Servidor escuchando 😜 ... en ${app.get('port')}`);
 }
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port); // Pone al server a escuchar
+// Se registran eventos
+server.on('error', onError);
+server.on('listening', onListening);
