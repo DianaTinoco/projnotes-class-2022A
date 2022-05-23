@@ -42,7 +42,7 @@ function normalizePort(val) {
  * Get port from environment and store in Express.
  */
 /** process.env.PORT Forma de acceder a la variable de entorno */
-const port = normalizePort(configKeys.env.PORT || '5000');
+const port = normalizePort(configKeys.port || '5000');
 // app es una instancia de ExpressJs[ ] [ NODE ]
 app.set('port', port);
 
